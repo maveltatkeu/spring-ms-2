@@ -2,7 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/spring-webflux" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/spring-webflux-crud" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/spring-boot-webflux" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/spring-boot-webflux-crud" vcs="Git" />
   </component>
 </project>
