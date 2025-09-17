@@ -1,0 +1,10 @@
+Spring boot & WebSockets: Build a Real-Time Chat App From Scratch
+
+https://www.youtube.com/watch?v=TywlS9iAZCM 
+
+
+WebSocket Tutorial with Spring Boot | Build One On One Chat Application
+
+https://www.youtube.com/watch?v=7T-HnTE6v64
+
+
