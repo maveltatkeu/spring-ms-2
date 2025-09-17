@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e3ccec2f-6649-4266-96b9-0c905e46e3a2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/api-gateway/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/api-gateway/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/api-gateway/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/api-gateway/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/api-gateway/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/api-gateway/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/api-gateway/src/main/java/com/dailycodebuffer/apigateway/ApiGatewayApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/api-gateway/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/api-gateway/src/test/java/com/dailycodebuffer/apigateway/ApiGatewayApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/config-server/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/config-server/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/config-server/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/config-server/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/config-server/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/config-server/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/config-server/src/main/java/com/dailycodebuffer/configserver/ConfigServerApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/config-server/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/config-server/src/main/resources/config/department-service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/config-server/src/main/resources/config/employee-service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/config-server/src/test/java/com/dailycodebuffer/configserver/ConfigServerApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/src/main/java/com/dailycodebuffer/departmentservice/DepartmentServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/src/main/java/com/dailycodebuffer/departmentservice/client/EmployeeClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/src/main/java/com/dailycodebuffer/departmentservice/config/WebClientConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/src/main/java/com/dailycodebuffer/departmentservice/controller/DepartmentController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/src/main/java/com/dailycodebuffer/departmentservice/model/Department.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/src/main/java/com/dailycodebuffer/departmentservice/model/Employee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/src/main/java/com/dailycodebuffer/departmentservice/repository/DepartmentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/department-service/src/test/java/com/dailycodebuffer/departmentservice/DepartmentServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/src/main/java/com/dailycodebuffer/employeeservice/EmployeeServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/src/main/java/com/dailycodebuffer/employeeservice/controller/EmployeeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/src/main/java/com/dailycodebuffer/employeeservice/model/Employee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/src/main/java/com/dailycodebuffer/employeeservice/repository/EmployeeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/employee-service/src/test/java/com/dailycodebuffer/employeeservice/EmployeeServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/service-registry/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/service-registry/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/service-registry/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/service-registry/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/service-registry/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/service-registry/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/service-registry/src/main/java/com/dailycodebuffer/serviceregistry/ServiceRegistryApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/service-registry/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-3-microservices-main/service-registry/src/test/java/com/dailycodebuffer/serviceregistry/ServiceRegistryApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "maveltatkeu"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/maveltatkeu/spring-ms-2.git",
+    "accountId": "5d5ce5a1-6478-41bf-8b27-1ff66662ea17"
+  }
+}]]></component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="32pPhAdL5xZJqAbYl8CuhrZVROf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e3ccec2f-6649-4266-96b9-0c905e46e3a2" name="Changes" comment="" />
+      <created>1758114658627</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1758114658627</updated>
+      <workItem from="1758114659558" duration="204000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
