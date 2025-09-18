@@ -21,7 +21,7 @@ public class PaymentEvent implements Event{
     }
 
     @Override
-    public Date getDate() {
+    public Date getDate()  {
         return eventDate;
     }
 
