@@ -13,11 +13,11 @@ import java.util.List;
 @RestController
 public class ProductQueryController {
 
-    @Autowired
-    private ProductQueryService queryService;
+  @Autowired
+  private ProductQueryService queryService;
 
-    @GetMapping
-    public List<Product> fetchAllProducts(){
-        return queryService.getProducts();
-    }
+  @GetMapping
+  public List<Product> fetchAllProducts() {
+    return queryService.getProducts();
+  }
 }

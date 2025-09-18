@@ -10,6 +10,6 @@ import org.cqrs.springcqrs.entity.Product;
 @NoArgsConstructor
 public class ProductEvent {
 
-    private String eventType;
-    private Product product;
+  private String eventType;
+  private Product product;
 }
