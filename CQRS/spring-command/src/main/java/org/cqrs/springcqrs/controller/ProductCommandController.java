@@ -1,6 +1,6 @@
 package org.cqrs.springcqrs.controller;
 
-import org.cqrs.springcqrs.dto.ProductEvent;
+import org.cqrs.springcqrs.dto.ProductDto;
 import org.cqrs.springcqrs.entity.Product;
 import org.cqrs.springcqrs.service.ProductCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,23 @@ public class ProductCommandController {
   private ProductCommandService commandService;
 
   @PostMapping
-  public Product createProduct(@RequestBody ProductEvent productEvent) {
-    return commandService.createProduct(productEvent);
+  public Product createProduct(@RequestBody ProductDto productDto) {
+    try {
+      return commandService.createProduct(productDto);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      return null;
+    }
   }
 
   @PutMapping("/{id}")
-  public Product updateProduct(@PathVariable long id, @RequestBody ProductEvent productEvent) {
-    return commandService.updateProduct(id, productEvent);
+  public Product updateProduct(@PathVariable long id, @RequestBody ProductDto productDto) {
+
+    try {
+      return commandService.createProduct(productDto);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      return null;
+    }
   }
 }

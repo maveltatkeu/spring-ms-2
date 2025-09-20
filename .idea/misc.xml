@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/CQRS/spring-command" />
+    <file type="web" url="file://$PROJECT_DIR$/CQRS/spring-query" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -8,6 +12,11 @@
         <option value="$PROJECT_DIR$/microservices-saga-choreography/order-service/pom.xml" />
         <option value="$PROJECT_DIR$/microservices-saga-choreography/payment-service/pom.xml" />
         <option value="$PROJECT_DIR$/microservices-saga-choreography/common-dtos/pom.xml" />
+        <option value="$PROJECT_DIR$/Kafka-Streams/producer/pom.xml" />
+        <option value="$PROJECT_DIR$/Kafka-Streams/consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-security-httpbasic-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/user-local-auth-email-verification-master/pom.xml" />
+        <option value="$PROJECT_DIR$/Sample-test/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,6 +1,6 @@
 package org.cqrs.springquery.controller;
 
-import org.cqrs.springquery.entity.Product;
+import org.cqrs.springquery.entity.ProductEntity;
 import org.cqrs.springquery.service.ProductQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class ProductQueryController {
   private ProductQueryService queryService;
 
   @GetMapping
-  public List<Product> fetchAllProducts() {
+  public List<ProductEntity> fetchAllProducts() {
     return queryService.getProducts();
   }
 }

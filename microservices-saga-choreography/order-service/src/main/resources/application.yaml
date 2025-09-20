@@ -1,6 +1,10 @@
 spring:
   cloud:
     stream:
+      kafka:
+        binder:
+          auto-create-topics: true
+          brokers: localhost:9092
       function:
         definition : orderSupplier;paymentEventConsumer
       bindings:
@@ -8,6 +12,10 @@ spring:
           destination: order-event
         paymentEventConsumer-in-0 :
           destination: payment-event
+  kafka:
+    consumer:
+      group-id: student-group
+      bootstrap-servers: localhost:9092
 
 server:
-  port: 8081
+  port: 8085

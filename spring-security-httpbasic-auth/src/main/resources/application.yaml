@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    username: maveldev
+    password: mavelpass
+    url: jdbc:postgresql://localhost:5432/sagadb
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
