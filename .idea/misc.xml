@@ -13,10 +13,14 @@
         <option value="$PROJECT_DIR$/microservices-saga-choreography/payment-service/pom.xml" />
         <option value="$PROJECT_DIR$/microservices-saga-choreography/common-dtos/pom.xml" />
         <option value="$PROJECT_DIR$/Kafka-Streams/producer/pom.xml" />
-        <option value="$PROJECT_DIR$/Kafka-Streams/consumer/pom.xml" />
         <option value="$PROJECT_DIR$/spring-security-httpbasic-auth/pom.xml" />
         <option value="$PROJECT_DIR$/user-local-auth-email-verification-master/pom.xml" />
         <option value="$PROJECT_DIR$/Sample-test/pom.xml" />
+        <option value="$PROJECT_DIR$/Kafka-Streams/consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/transactional-outbox-patterntransactional-outbox-pattern/order-poller/pom.xml" />
+        <option value="$PROJECT_DIR$/transactional-outbox-patterntransactional-outbox-pattern/order-servcie/pom.xml" />
+        <option value="$PROJECT_DIR$/event-sourcing-main/shipping-service/pom.xml" />
+        <option value="$PROJECT_DIR$/event-sourcing-main/order-service/pom.xml" />
       </list>
     </option>
   </component>

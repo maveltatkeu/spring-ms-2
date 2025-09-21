@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking System</title>
+    
+    <!-- Bootstrap for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 900px;
+        }
+        .card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: perspective(1000px) rotateX(3deg);
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: perspective(1000px) rotateX(0deg) scale(1.02);
+        }
+        .spinner {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .progress {
+            height: 20px;
+        }
+        .tracking-icon {
+            font-size: 22px;
+            margin-right: 10px;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .form-control {
+            width: 50%;
+        }
+        .btn {
+            width: 15%;
+        }
+        .details-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        .card {
+            flex: 1;
+            background: #ffffff;
+        }
+        /* Dark Mode Styling */
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        .card.dark-mode {
+            background-color: #1e1e1e;
+            color: white;
+        }
+        .dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <i class="fas fa-moon dark-mode-toggle" onclick="toggleDarkMode()"></i>
+        <h2 class="text-primary mb-3">Real-Time Order Tracking</h2>
+        
+        <div class="search-container">
+            <input type="text" id="orderId" class="form-control" placeholder="Enter Order ID">
+            <button class="btn btn-primary" onclick="fetchOrderDetails()">Track</button>
+        </div>
+
+        <div class="spinner" id="loadingSpinner">
+            <div class="spinner-border text-primary"></div>
+            <p>Fetching Order Details...</p>
+        </div>
+
+        <div id="orderDetails" class="mt-4 details-container"></div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            document.querySelectorAll(".card").forEach(card => card.classList.toggle("dark-mode"));
+        }
+
+        function fetchOrderDetails() {
+            let orderId = document.getElementById("orderId").value;
+            if (!orderId) {
+                alert("Please enter a valid Order ID");
+                return;
+            }
+
+            document.getElementById("loadingSpinner").style.display = "block";
+            document.getElementById("orderDetails").innerHTML = "";
+
+            const orderApi = `http://localhost:8081/orders/${orderId}`;
+            const shippingApi = `http://localhost:8082/shipping/${orderId}`;
+            const paymentApi = `http://localhost:8083/payments/${orderId}`;
+
+            Promise.all([
+                fetch(orderApi).then(response => response.json()),
+                fetch(shippingApi).then(response => response.json()),
+                fetch(paymentApi).then(response => response.json())
+            ])
+            .then(([order, shipping, payment]) => {
+                displayOrderDetails(order, shipping, payment);
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+                alert("Failed to fetch order details. Please check if backend services are running.");
+            })
+            .finally(() => {
+                document.getElementById("loadingSpinner").style.display = "none";
+            });
+        }
+
+        function displayOrderDetails(order, shipping, payment) {
+            let trackingIcon = shipping.status === "In Transit" ? "fa-truck-moving" : "fa-box-open";
+            let progressPercentage = shipping.status === "Delivered" ? 100 : shipping.status === "In Transit" ? 60 : 20;
+            
+            let html = `
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <i class="fa fa-shopping-cart tracking-icon"></i> Order Details
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Order ID:</strong> ${order.orderId}</p>
+                        <p><strong>Items:</strong> ${order.items}</p>
+                        <p><strong>Status:</strong> ${order.status}</p>
+                        <p><strong>Order Date:</strong> ${order.date}</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <i class="fa ${trackingIcon} tracking-icon"></i> Shipping Details
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Status:</strong> ${shipping.status}</p>
+                        <p><strong>Current Location:</strong> ${shipping.currentLocation}</p>
+                        <p><strong>Estimated Arrival:</strong> ${shipping.eta}</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: ${progressPercentage}%;">
+                                ${progressPercentage}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-warning text-white">
+                        <i class="fa fa-credit-card tracking-icon"></i> Payment Details
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Status:</strong> ${payment.status}</p>
+                        <p><strong>Method:</strong> ${payment.method}</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById("orderDetails").innerHTML = html;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

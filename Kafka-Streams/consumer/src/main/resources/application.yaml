@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: consumer
+  cloud:
+    function:
+      definition: processRiderLocaltion;processRiderStatus
+    stream:
+      kafka:
+        binder:
+          auto-create-topics: true
+          brokers: localhost:9092
+      function:
+        definition: processRiderLocaltion;processRiderStatus
+      bindings:
+        processRiderStatus-in-0:
+          destination: my-topic-status
+        processRiderLocaltion-in-0:
+          group: rider-location-gp
+          destination:  my-topic
+
+server:
+  port: 8081

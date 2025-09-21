@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: user-local-auth-email-verification
+  datasource:
+    url: jdbc:postgresql://localhost:5432/email-verification-demo
+    username: postgres
+    password: root123
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

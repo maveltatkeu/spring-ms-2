@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: producer
+  cloud:
+    function:
+      definition: sendRiderLocation;sendRiderStatus
+    stream:
+      kafka:
+        binder:
+          auto-create-topics: true
+          brokers: localhost:9092
+      function:
+        definition: sendRiderLocation;sendRiderStatus
+      bindings:
+        sendRiderStatus-out-0:
+          destination: my-topic-status
+          content-type: text/plain
+        sendRiderLocation-out-0:
+          destination: my-topic
+          content-type: application/json
+      poller:
+        fixed-delay: 1000
