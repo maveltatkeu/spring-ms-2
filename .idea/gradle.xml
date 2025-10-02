@@ -20,6 +20,14 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/hexa-architecture" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/hexa-architecture" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/multi-module-microservice/payment-service" />
         <option name="modules">
           <set>

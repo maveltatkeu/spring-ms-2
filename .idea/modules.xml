@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-command.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-command.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/spring-ms-2.iml" filepath="$PROJECT_DIR$/.idea/spring-ms-2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-query.main.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-query.main.iml" />
     </modules>
   </component>
 </project>
