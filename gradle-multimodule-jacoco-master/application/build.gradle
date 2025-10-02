@@ -1,0 +1,99 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'idea'
+}
+
+apply plugin: 'application.conventions'
+
+// Configure source sets for integration tests
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integrationTest/java')
+        }
+        resources.srcDir file('src/integrationTest/resources')
+    }
+}
+
+// Configure integration test task
+task integrationTest(type: Test) {
+    description = 'Runs integration tests.'
+    group = 'verification'
+    
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    
+    // Always run integration tests if requested
+    outputs.upToDateWhen { false }
+    
+    // Use JUnit Platform for integration tests
+    useJUnitPlatform()
+    
+    // Provide system property to indicate integration tests
+    systemProperty 'spring.profiles.active', 'integration-test'
+}
+
+// Configure JaCoCo for integration tests
+task jacocoIntegrationTestReport(type: JacocoReport) {
+    description = 'Generates JaCoCo coverage reports for integration tests.'
+    group = 'verification'
+    
+    dependsOn integrationTest
+    
+    executionData integrationTest
+    
+    sourceSets sourceSets.main
+
+    // Add specific project dependencies for coverage analysis
+    def projectDependencies = [
+            project(':api'),
+            project(':products'),
+            project(':common')
+    ]
+
+    // Add class directories from the specified project dependencies
+    additionalClassDirs files(projectDependencies.collect { proj ->
+        proj.sourceSets.main.output.classesDirs
+    })
+
+    // Add source directories from the specified project dependencies
+    additionalSourceDirs files(projectDependencies.collect { proj ->
+        proj.sourceSets.main.allJava.srcDirs
+    })
+
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+// Make the check task depend on integration tests
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
+
+dependencies {
+    // Module dependencies
+    implementation project(':api')
+    implementation project(':products')
+    implementation project(':common')
+    
+    // Lombok - updated to support newer Java versions
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    
+    // Test dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
+    
+    // Integration test dependencies - specify individually instead of referencing configurations
+    integrationTestImplementation 'org.springframework.boot:spring-boot-starter-test'
+    integrationTestImplementation 'org.springframework:spring-web' // <-- Add this
+    integrationTestImplementation 'org.testcontainers:junit-jupiter:1.17.6'
+    // Add any other specific integration test dependencies
+    integrationTestImplementation project(':api')
+    integrationTestImplementation project(':products')
+    integrationTestImplementation project(':common')
+}

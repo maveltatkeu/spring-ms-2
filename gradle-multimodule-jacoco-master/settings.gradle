@@ -1,0 +1,11 @@
+rootProject.name = 'gradle-multimodule-jacoco'
+
+include 'application'
+include 'api'
+include 'common'
+include 'products'
+
+// Configure all projects for better IDE integration
+rootProject.children.each { project ->
+    project.projectDir = file("${project.name}")
+}

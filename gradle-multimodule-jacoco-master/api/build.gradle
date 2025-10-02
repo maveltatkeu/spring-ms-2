@@ -1,0 +1,18 @@
+plugins {
+    id 'java-library'
+}
+
+apply plugin: 'library.conventions'
+
+dependencies {
+    // Module dependencies
+    implementation project(':products')
+    implementation project(':common')
+
+    // Spring Boot dependencies - updated to 3.2.x for Java 21 compatibility
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.2.3'
+
+    // Lombok - already updated to support Java 21
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+}

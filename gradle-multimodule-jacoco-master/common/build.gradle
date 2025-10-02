@@ -1,0 +1,15 @@
+plugins {
+    id 'java-library'
+}
+
+apply plugin: 'library.conventions'
+
+dependencies {
+    // Add any specific dependencies for the common module
+    api 'org.apache.commons:commons-lang3:3.12.0'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.15.3'
+
+    // Lombok - already updated to support Java 21
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+}

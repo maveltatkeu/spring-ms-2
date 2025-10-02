@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_package = "com.partenairedecode.grpc.payment";
+option java_multiple_files = true;
+
+package payment;
+
+// Importons les messages du service Product (pour OperationStatus)
+import "product.proto";
+
+// 1. MESSAGES
+message Payment {
+  string paymentId = 1;
+  string orderId = 2; // Clé étrangère vers Order Service
+  double amount = 3;
+  string method = 4; // Ex: CREDIT_CARD, PAYPAL, OM, MoMo, ADVANS,
+  string status = 5; // Ex: INITIATED, PENDING, APPROVED, REJECTED
+}
+
+message PaymentIdRequest {
+  string paymentId = 1;
+}
+
+message Empty{}
+
+// 2. SERVICE
+service PaymentService {
+  // Créer un paiement (doit vérifier la commande via gRPC)
+  rpc processPayment (Payment) returns (Payment);
+
+  // Lire un paiement par son ID
+  rpc getPaymentById (PaymentIdRequest) returns (Payment);
+
+  //  Utilise 'stream Payment' pour envoyer plusieurs réponses
+  rpc getAllPayments (Empty) returns (stream Payment);
+}

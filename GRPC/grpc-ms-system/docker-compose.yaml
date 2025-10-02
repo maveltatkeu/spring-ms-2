@@ -1,0 +1,123 @@
+version: '3.8'
+
+services:
+  # ====================================================================
+  # 1. Eureka Discovery Server
+  # ====================================================================
+  discovery-server:
+    image: discovery-server:1.0.0-SNAPSHOT
+    build:
+      context: ./discovery-server
+      args:
+        - ARTIFACT_NAME=discovery-server-1.0.0-SNAPSHOT
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+    environment:
+      # Configure Eureka pour ne pas s'enregistrer et ne pas récupérer (mode standalone)
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
+
+  # ====================================================================
+  # 2. Product Service (Product-Service)
+  # ====================================================================
+  product-service:
+    image: product-service:1.0.0-SNAPSHOT
+    build:
+      context: ./product-service
+      args:
+        - ARTIFACT_NAME=product-service-1.0.0-SNAPSHOT
+    container_name: product-service
+    ports:
+      - "9090:9090" # Port gRPC
+    environment:
+      # Référence le serveur Eureka par son nom de service Docker
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
+      - SPRING_APPLICATION_NAME=PRODUCT-SERVICE
+    depends_on:
+      - discovery-server # Démarre après le serveur Eureka
+    restart: on-failure # Relance en cas d'échec
+
+  # ====================================================================
+  # 3. Order Service (Order-Service)
+  # ====================================================================
+  order-service:
+    image: order-service:1.0.0-SNAPSHOT
+    build:
+      context: ./order-service
+      args:
+        - ARTIFACT_NAME=order-service-1.0.0-SNAPSHOT
+    container_name: order-service
+    ports:
+      - "9091:9091" # Port gRPC
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
+      - SPRING_APPLICATION_NAME=ORDER-SERVICE
+      # 🔑 Le client gRPC utilise le nom d'hôte Docker pour trouver le service
+      - GRPC_CLIENT_PRODUCT_SERVICE_ADDRESS=eureka:PRODUCT-SERVICE
+    depends_on:
+      - discovery-server
+      - product-service # Démarre après le Product Service (bonne pratique)
+    restart: on-failure
+
+  # ====================================================================
+  # 4. Payment Service (Payment-Service)
+  # ====================================================================
+  payment-service:
+    image: payment-service:1.0.0-SNAPSHOT
+    build:
+      context: ./payment-service
+      args:
+        - ARTIFACT_NAME=payment-service-1.0.0-SNAPSHOT
+    container_name: payment-service
+    ports:
+      - "9092:9092" # Port gRPC
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
+      - SPRING_APPLICATION_NAME=PAYMENT-SERVICE
+      # 🔑 Le client gRPC utilise le nom d'hôte Docker pour trouver le service
+      - GRPC_CLIENT_ORDER_SERVICE_ADDRESS=eureka:ORDER-SERVICE
+    depends_on:
+      - discovery-server
+      - order-service # Démarre après l'Order Service
+    restart: on-failure
+
+  # ====================================================================
+  # 5. Envoy Proxy (API Gateway)
+  # ====================================================================
+  envoy-proxy:
+    image: envoyproxy/envoy-dev:latest
+    container_name: envoy-proxy
+    volumes:
+      # Monte le fichier de configuration Envoy que nous avons créé
+      - ./envoy.yaml:/etc/envoy/envoy.yaml:ro
+    ports:
+      - "8080:8080" # Le port d'entrée unique
+    command: ["envoy", "-c", "/etc/envoy/envoy.yaml"]
+    depends_on:
+      # S'assure que tous les services sont démarrés avant qu'Envoy ne démarre
+      - product-service
+      - order-service
+      - payment-service
+
+  # ====================================================================
+  # 6. Test Client
+  # ====================================================================
+  test-client:
+    image: grpc-test-client:1.0.0-SNAPSHOT
+    build:
+      context: ./grpc-test-client
+      args:
+        # Assurez-vous que le nom du JAR correspond
+        - ARTIFACT_NAME=grpc-test-client-1.0.0-SNAPSHOT
+    container_name: test-client
+    # Nous n'avons pas besoin d'exposer de ports, car le client est un processus éphémère.
+    environment:
+      # 🔑 Le client doit pointer vers l'adresse d'Envoy au sein du réseau Docker.
+      # Le nom du service Docker Compose est 'envoy-proxy'.
+      - GRPC_CLIENT_GLOBAL_ADDRESS=static://envoy-proxy:8080
+      - GRPC_CLIENT_GLOBAL_NEGOTIATION_TYPE=PLAINTEXT
+    depends_on:
+      - envoy-proxy # Assurez-vous qu'Envoy est démarré et routé avant de tester
+    # 🔑 Ne pas redémarrer, car c'est une commande unique.
+    restart: "no"

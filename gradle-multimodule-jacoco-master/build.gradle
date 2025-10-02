@@ -1,0 +1,139 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'idea'
+}
+
+allprojects {
+    group = 'com.example.productmanagement'
+    version = '0.0.1-SNAPSHOT'
+    
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url 'https://repo.spring.io/release' }
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+    
+    // Force a specific version of snakeyaml that is available
+    configurations.all {
+        resolutionStrategy.force 'org.yaml:snakeyaml:1.30'
+    }
+    
+    apply plugin: 'idea'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+    
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    
+    jacoco {
+        toolVersion = "0.8.10" // Updated to the latest version with Java 17+ support
+    }
+    
+    jacocoTestReport {
+        reports {
+            xml.required = true
+            html.required = true
+        }
+    }
+    
+    test {
+        useJUnitPlatform()
+        finalizedBy jacocoTestReport
+        
+        // Add JaCoCo agent configuration to exclude problematic classes
+        jacoco {
+            excludes = ['sun.util.resources.cldr.*']
+        }
+    }
+}
+
+// Task to aggregate all unit test JaCoCo reports
+task jacocoMergedReport(type: JacocoReport) {
+    description = 'Generates an aggregate report from all subprojects unit tests'
+    group = 'verification'
+    
+    dependsOn = subprojects.test
+    
+    additionalSourceDirs.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories.setFrom files(subprojects.sourceSets.main.output)
+    executionData.setFrom files(subprojects.jacocoTestReport.executionData)
+    
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+}
+
+// Task to aggregate all integration test JaCoCo reports (if they exist in modules)
+task jacocoMergedIntegrationTestReport(type: JacocoReport) {
+    description = 'Generates an aggregate report from all subprojects integration tests'
+    group = 'verification'
+    
+    // We'll only include modules that have integration tests
+    def modulesWithIntegrationTests = subprojects.findAll { 
+        it.tasks.findByName('integrationTest') != null 
+    }
+    
+    dependsOn = modulesWithIntegrationTests.collect { it.tasks.findByName('integrationTest') }
+    
+    additionalSourceDirs.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories.setFrom files(subprojects.sourceSets.main.output)
+    
+    // Collect execution data only from modules with integration tests
+    executionData.setFrom files(modulesWithIntegrationTests.collect { 
+        it.tasks.findByName('jacocoIntegrationTestReport')?.executionData 
+    }).filter { it.exists() }
+    
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+    
+    // Only run if there's integration test data
+    onlyIf = { !executionData.isEmpty() }
+}
+
+// Task that combines unit and integration test coverage
+task jacocoFullReport(type: JacocoReport) {
+    description = 'Generates an aggregate report from all unit and integration tests'
+    group = 'verification'
+    
+    dependsOn jacocoMergedReport, jacocoMergedIntegrationTestReport
+    
+    additionalSourceDirs.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories.setFrom files(subprojects.sourceSets.main.output)
+    
+    // Collect execution data from both unit and integration tests
+    executionData.setFrom files(jacocoMergedReport.executionData, jacocoMergedIntegrationTestReport.executionData)
+    
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+    
+    // Skip this task if integration test data doesn't exist
+    onlyIf = { 
+        jacocoMergedReport.executionData.files.size() > 0 ||
+        jacocoMergedIntegrationTestReport.executionData.files.size() > 0 
+    }
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
