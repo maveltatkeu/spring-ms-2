@@ -8,29 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="order-poller" />
-        <module name="payment-service" />
         <module name="order-service (1) (com.javatechie)" />
         <module name="order-servcie" />
         <module name="common-dtos" />
         <module name="order-service" />
         <module name="Sample-test" />
         <module name="shipping-service" />
-      </profile>
-      <profile name="Gradle Imported" enabled="true">
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.40/398c6d2d7c42c96b65e78d2ddc9be0058c163453/lombok-1.18.40.jar" />
-        </processorPath>
-        <module name="spring-query.main" />
-      </profile>
-      <profile name="Annotation profile for user-local-auth-email-verification" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
-        </processorPath>
-        <module name="user-local-auth-email-verification" />
       </profile>
       <profile name="Annotation profile for spring-security-httpbasic-auth" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -43,6 +26,16 @@
         <module name="producer" />
         <module name="consumer" />
       </profile>
+      <profile name="Annotation profile for food-order-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="user-local-auth-email-verification" />
+        <module name="food-order-service" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Kafka-Streams" target="21" />
@@ -53,6 +46,10 @@
       <module name="Kafka-Streams" options="-parameters" />
       <module name="common-dtos" options="-parameters" />
       <module name="consumer" options="-parameters" />
+      <module name="food-order-service" options="-parameters" />
+      <module name="hexa-architecture" options="-parameters" />
+      <module name="hexa-architecture.main" options="-parameters" />
+      <module name="hexa-architecture.test" options="-parameters" />
       <module name="order-poller" options="-parameters" />
       <module name="order-servcie" options="-parameters" />
       <module name="order-service" options="-parameters" />
