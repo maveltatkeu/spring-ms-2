@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option java_package = "com.partenairedecode.grpc.product";
+option java_multiple_files = true;
+
+package product;
+
+// 1. MESSAGES (Les structures de données)
+message Product {
+  string productId = 1;
+  string name = 2;
+  double price = 3;
+  int32 quantity = 4;
+}
+
+message ProductIdRequest {
+  string productId = 1;
+}
+
+message OperationStatus {
+  bool success = 1;
+  string message = 2;
+}
+
+message Empty{}
+
+// 2. SERVICE (Les méthodes exposées)
+service ProductService {
+  // Créer ou mettre à jour un produit
+  rpc saveProduct (Product) returns (Product);
+
+  // Lire un produit par son ID
+  rpc getProductById (ProductIdRequest) returns (Product);
+
+  // Supprimer un produit
+  rpc deleteProduct (ProductIdRequest) returns (OperationStatus);
+
+  // Nouvelle méthode : Utilise 'stream Product' pour envoyer plusieurs réponses
+  rpc getAllProducts (Empty) returns (stream Product);
+}

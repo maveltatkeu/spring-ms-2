@@ -1,0 +1,14 @@
+# Use the official Envoy image
+FROM envoyproxy/envoy-dev:latest
+
+# Copy the configuration file and the compiled protobuf descriptors
+COPY envoy.yaml /etc/envoy/envoy.yaml
+COPY product.pb /etc/envoy/product.pb
+# Copy other .pb files...
+COPY order.pb /etc/envoy/order.pb
+COPY payment.pb /etc/envoy/payment.pb
+
+# Envoy listens on 8080 as defined in envoy.yaml
+EXPOSE 8080
+
+# The default entrypoint for the Envoy image runs the proxy with the config
