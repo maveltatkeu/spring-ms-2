@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/CQRS/spring-command" />
     <file type="web" url="file://$PROJECT_DIR$/CQRS/spring-query" />
     <file type="web" url="file://$PROJECT_DIR$/hexa-architecture" />
+    <file type="web" url="file://$PROJECT_DIR$/multi-module-microservice/payment-service" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

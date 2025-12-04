@@ -9,12 +9,14 @@ import com.partenairedecode.grpc.product.ProductIdRequest;
 import com.partenairedecode.grpc.product.ProductServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @GrpcService
 @RequiredArgsConstructor
 public class ProductGrpcService extends ProductServiceGrpc.ProductServiceImplBase {
@@ -40,7 +42,7 @@ public class ProductGrpcService extends ProductServiceGrpc.ProductServiceImplBas
 
     // 2. Sauvegarder dans la base de données
     ProductEntity savedProduct = productRepository.save(productEntity);
-
+    log.info("Product Created: {}", savedProduct);
     // 3. Mapper l'Entité JPA au message gRPC de réponse
     Product response = Product.newBuilder()
         .setProductId(savedProduct.getProductId())

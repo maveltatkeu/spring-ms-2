@@ -1,0 +1,39 @@
+grpc:
+  server:
+    port: 9092
+  reflection-service-enabled: true
+
+  client:
+    product-service:
+      address: eureka:order-ms
+      negotiation-type: PLAINTEXT
+      enable-keep-alive: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    # 🌟 CRITICAL FIX 🌟
+    # Tell Eureka to use the gRPC server port (9092) instead of the default 'server.port'
+    non-secure-port: ${grpc.server.port}
+    # It's a good practice to set a custom Instance ID, especially with random ports
+    instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+    # You might also want to set this metadata so other clients know it's a gRPC service
+    metadata-map:
+      grpc.port: ${grpc.server.port} # Add gRPC port to metadata for client lookup
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/paymentdb
+    username: maveldev
+    password: mavelpass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+

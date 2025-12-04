@@ -11,6 +11,7 @@ import com.partenairedecode.grpc.product.Product;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 import java.time.Instant;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @GrpcService
 @RequiredArgsConstructor
 public class OrderGrpcService extends OrderServiceGrpc.OrderServiceImplBase {
@@ -89,7 +91,8 @@ public class OrderGrpcService extends OrderServiceGrpc.OrderServiceImplBase {
                 .setStatus("PENDING")
                 .setCreatedAt(Timestamp.newBuilder().setSeconds(Instant.now().getEpochSecond()))
                 .build();
-        
+
+        log.info("Order Created: {}", response);
         // 4. Envoi de la réponse
         responseObserver.onNext(response);
         responseObserver.onCompleted();
