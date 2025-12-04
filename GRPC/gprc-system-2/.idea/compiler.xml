@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="discovery-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="com.luwings.protobuf-definitions.main" target="21" />
+      <module name="com.luwings.protobuf-definitions.test" target="21" />
+      <module name="grpc-test-client" target="21" />
+      <module name="order-service" target="21" />
+      <module name="payment-service" target="21" />
+      <module name="product-service" target="21" />
+      <module name="protobuf-definitions" target="21" />
+      <module name="protobuf-definitions.main" target="21" />
+      <module name="protobuf-definitions.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="com.luwings.protobuf-definitions.main" options="-parameters" />
+      <module name="com.luwings.protobuf-definitions.test" options="-parameters" />
+      <module name="config-server" options="-parameters" />
+      <module name="config-server.main" options="-parameters" />
+      <module name="config-server.test" options="-parameters" />
+      <module name="discovery-server" options="-parameters" />
+      <module name="grpc-test-client" options="-parameters" />
+      <module name="order-ms" options="-parameters" />
+      <module name="order-ms.main" options="-parameters" />
+      <module name="order-ms.test" options="-parameters" />
+      <module name="order-service" options="-parameters" />
+      <module name="payment-ms" options="-parameters" />
+      <module name="payment-ms.main" options="-parameters" />
+      <module name="payment-ms.test" options="-parameters" />
+      <module name="payment-service" options="-parameters" />
+      <module name="product-ms" options="-parameters" />
+      <module name="product-ms.main" options="-parameters" />
+      <module name="product-ms.test" options="-parameters" />
+      <module name="product-service" options="-parameters" />
+      <module name="protobuf-definitions" options="-parameters" />
+      <module name="protobuf-definitions.main" options="-parameters" />
+      <module name="protobuf-definitions.test" options="-parameters" />
+      <module name="test-client" options="-parameters" />
+      <module name="test-client.main" options="-parameters" />
+      <module name="test-client.test" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,94 @@
+
+services:
+
+  # ====================================================================
+  # 1. Product Service (Product-Service)
+  # ====================================================================
+  product-service:
+    image: product-service:1.0.0-SNAPSHOT
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile
+      args:
+        - ARTIFACT_NAME=product-service-1.0.0-SNAPSHOT
+    container_name: product-service
+    ports:
+      - "9090:9090" # Port gRPC
+    environment:
+      - SPRING_APPLICATION_NAME=PRODUCT-SERVICE
+    # Wait for the database (H2 is in-memory, but this is good practice for real DBs)
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9090/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - microservice-net
+    restart: on-failure # Relance en cas d'échec
+
+  # ====================================================================
+  # 2. Order Service (Order-Service)
+  # ====================================================================
+  order-service:
+    image: order-service:1.0.0-SNAPSHOT
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+      args:
+        - ARTIFACT_NAME=order-service-1.0.0-SNAPSHOT
+    container_name: order-service
+    ports:
+      - "9091:9091" # Port gRPC
+    environment:
+      - SPRING_APPLICATION_NAME=ORDER-SERVICE
+    depends_on:
+      - product-service # Démarre après le Product Service (bonne pratique)
+    restart: on-failure
+    networks:
+      - microservice-net
+
+  # ====================================================================
+  # 3. Payment Service (Payment-Service)
+  # ====================================================================
+  payment-service:
+    image: payment-service:1.0.0-SNAPSHOT
+    build:
+      context: ./payment-service
+      dockerfile: Dockerfile
+      args:
+        - ARTIFACT_NAME=payment-service-1.0.0-SNAPSHOT
+    container_name: payment-service
+    ports:
+      - "9092:9092" # Port gRPC
+    environment:
+      - SPRING_APPLICATION_NAME=PAYMENT-SERVICE
+    depends_on:
+      - order-service # Démarre après l'Order Service
+    restart: on-failure
+    networks:
+      - microservice-net
+
+  # ====================================================================
+  # 4. Envoy Proxy (API Gateway)
+  # ====================================================================
+  envoy:
+    build:
+      context: ./docker-envoy # Path to the Envoy setup directory
+      dockerfile: Dockerfile-envoy
+    container_name: api-gateway
+    ports:
+      # Expose the external HTTP/JSON port (8080)
+      - "8080:8080"
+    networks:
+      - microservice-net
+    depends_on:
+      - product-service
+      - order-service
+      - payment-service
+    # The container name acts as the service discovery name in the Envoy config (e.g., address: product-service)
+
+# Define a common network for all services
+networks:
+  microservice-net:
+    driver: bridge
+

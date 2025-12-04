@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c3c1b709-f4dc-4ecb-8ded-6378b37d4f59" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/CIAidSettingsState.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReadMe.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-envoy/Dockerfile-envoy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-envoy/order.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-envoy/payment.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-envoy/product.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grpc-test-client/src/main/java/com/partenairedecode/grpctestclient/service/TestClientService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../grpc-ms-system/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../grpc-ms-system/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../grpc-ms-system/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../grpc-ms-system/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../grpc-ms-system/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../grpc-ms-system/discovery-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../grpc-ms-system/discovery-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../grpc-ms-system/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../grpc-ms-system/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../grpc-ms-system/order-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../grpc-ms-system/order-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../grpc-ms-system/order-service/src/test/java/com/partenairedecode/orderservice/OrderServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../grpc-ms-system/payment-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../grpc-ms-system/payment-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../grpc-ms-system/payment-service/src/test/java/com/partenairedecode/paymentservice/PaymentServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../grpc-ms-system/product-service/src/test/java/com/partenairedecode/product/ProductServiceApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/grpc-dtos" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;maveltatkeu&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/maveltatkeu/spring-ms-2.git&quot;,
+    &quot;accountId&quot;: &quot;46994028-d373-424d-8801-700450f7d4e3&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="33QDZOIAcoDP1dnuIKsTM0C9jwb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.product-service/Dockerfile.executor": "Run",
+    "Maven.discovery-server [clean].executor": "Run",
+    "Maven.discovery-server [compile].executor": "Run",
+    "Maven.discovery-server [install].executor": "Run",
+    "Maven.discovery-server [validate].executor": "Run",
+    "Maven.grpc-contract [clean].executor": "Run",
+    "Maven.grpc-contract [compile].executor": "Run",
+    "Maven.grpc-contract [install].executor": "Run",
+    "Maven.grpc-ms-system [clean].executor": "Run",
+    "Maven.grpc-ms-system [install].executor": "Run",
+    "Maven.order-service [clean].executor": "Run",
+    "Maven.order-service [install].executor": "Run",
+    "Maven.payment-service [clean].executor": "Run",
+    "Maven.payment-service [install].executor": "Run",
+    "Maven.product-service [clean].executor": "Run",
+    "Maven.product-service [compile].executor": "Run",
+    "Maven.product-service [install].executor": "Run",
+    "Maven.product-service [package].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.GrpcTestClientApplication.executor": "Run",
+    "Spring Boot.OrderServiceApplication.executor": "Run",
+    "Spring Boot.ProductServiceApplication (1).executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/media/korawings/Saved1/KoraDev/_A_PROJECTS/projectsSpring/spring-ms-2/GRPC/grpc-ms-system-1/grpc-dtos",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "h2"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/grpc-dtos" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="C:\Users\mavel.tatkeu.mbiakop\OneDrive - Accenture\Documents\PROJECTS\spring-grpc-envoy\product-service" />
+      <recent name="C:\Users\mavel.tatkeu.mbiakop\OneDrive - Accenture\Documents\PROJECTS\spring-grpc-envoy\payment-service" />
+      <recent name="C:\Users\mavel.tatkeu.mbiakop\OneDrive - Accenture\Documents\PROJECTS\spring-grpc-envoy\order-service" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docker-envoy" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+    <option name="configurationStatuses">
+      <map>
+        <entry key="SpringBootApplicationConfigurationType">
+          <value>
+            <map>
+              <entry key="GrpcTestClientApplication" value="FAILED" />
+              <entry key="OrderServiceApplication" value="FAILED" />
+              <entry key="ProductServiceApplication (1)" value="FAILED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="RunManager" selected="Docker.product-service/Dockerfile">
+    <configuration name="CommonsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="commons" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.grpc.evoy.commons.CommonsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DiscoveryServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="discovery-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.partenairedecode.discoveryserver.DiscoveryServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GrpcTestClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="grpc-test-client" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.partenairedecode.grpctestclient.GrpcTestClientApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="order-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.partenairedecode.orderservice.OrderServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrdersServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="orders-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.grpc.evoy.ordersservice.OrdersServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PaymentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="payment-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.partenairedecode.paymentservice.PaymentServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PaymentsServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="payments-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.grpc.evoy.paymentsservice.PaymentsServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductServiceApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="product-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.partenairedecode.product.ProductServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="product-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.grpc.evoy.productservice.ProductServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile" />
+      <method v="2" />
+    </configuration>
+    <configuration name="product-service/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="product-service/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.product-service/Dockerfile" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c3c1b709-f4dc-4ecb-8ded-6378b37d4f59" name="Changes" comment="" />
+      <created>1759298834716</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759298834716</updated>
+      <workItem from="1759298837070" duration="3800000" />
+      <workItem from="1759341901164" duration="9980000" />
+      <workItem from="1759397295485" duration="2239000" />
+      <workItem from="1759419538277" duration="7566000" />
+      <workItem from="1759432828854" duration="12177000" />
+      <workItem from="1759507249369" duration="17432000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
