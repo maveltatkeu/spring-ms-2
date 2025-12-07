@@ -1,11 +1,15 @@
 package com.batch.batchalibou.config;
 
+import com.batch.batchalibou.model.Customer;
 import com.batch.batchalibou.model.Student;
+import com.batch.batchalibou.processor.CustomerProcessor;
 import com.batch.batchalibou.processor.StudentProcessor;
+import com.batch.batchalibou.repository.CustomerRepository;
 import com.batch.batchalibou.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -16,16 +20,13 @@ import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,9 +36,11 @@ import java.util.concurrent.Executors;
  */
 @Configuration
 @RequiredArgsConstructor
+@EnableBatchProcessing
 public class BatchConfig {
 
   private final StudentRepository studentRepository;
+  private final CustomerRepository customerRepository;
   private final JobRepository jobRepository;
   private final PlatformTransactionManager transactionManager;
 
@@ -54,10 +57,30 @@ public class BatchConfig {
   }
 
   @Bean
+  public FlatFileItemReader<Customer> customerReader() {
+
+    FlatFileItemReader<Customer> itemReader = new FlatFileItemReader<>();
+
+    itemReader.setResource(new FileSystemResource("src/main/resources/customers.csv"));
+    itemReader.setName("customerReader");
+    itemReader.setLinesToSkip(1);
+    itemReader.setLineMapper(customerLineMapper());
+
+    return itemReader;
+  }
+
+  // ItemProcessors
+  @Bean
   public ItemProcessor<Student, Student> processor() {
     return new StudentProcessor();
   }
 
+  @Bean
+  public ItemProcessor<Customer, Customer> customerProcessor() {
+    return new CustomerProcessor();
+  }
+
+  // ItemWriters
   @Bean
   public RepositoryItemWriter<Student> writer() {
     RepositoryItemWriter<Student> writer = new RepositoryItemWriter<>();
@@ -67,9 +90,19 @@ public class BatchConfig {
   }
 
   @Bean
+  public RepositoryItemWriter<Customer> customerWriter() {
+    RepositoryItemWriter<Customer> custWriter = new RepositoryItemWriter<>();
+    custWriter.setRepository(customerRepository);
+    custWriter.setMethodName("save");
+
+    return custWriter;
+  }
+
+  // Steps
+  @Bean
   public Step importStep() {
     return new StepBuilder("importStep", jobRepository)
-        .<Student,Student>chunk(1000, transactionManager)
+        .<Student, Student>chunk(1000, transactionManager)
         .reader(reader())
         .processor(processor())
         .writer(writer())
@@ -78,6 +111,18 @@ public class BatchConfig {
   }
 
   @Bean
+  public Step customerStep() {
+    return new StepBuilder("customerStep", jobRepository)
+        .<Customer,Customer>chunk(100, transactionManager)
+        .reader(customerReader())
+        .processor(customerProcessor())
+        .writer(customerWriter())
+        .taskExecutor(taskExecutor())
+        .build();
+  }
+
+  //Jobs
+  @Bean
   public Job importJob() {
     return new JobBuilder("importJob", jobRepository)
         .start(importStep())
@@ -85,10 +130,17 @@ public class BatchConfig {
   }
 
   @Bean
+  public Job customerJob() {
+    return new JobBuilder("customerJob",jobRepository)
+        .start(customerStep())
+        .build();
+
+  }
+
+  @Bean
   public TaskExecutor taskExecutor() {
-//    ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor();
     SimpleAsyncTaskExecutor executor = new SimpleAsyncTaskExecutor();
-    executor.setThreadNamePrefix("importJob");
+    executor.setThreadNamePrefix("batchJob_");
     executor.setConcurrencyLimit(10);
     return executor;
   }
@@ -103,6 +155,22 @@ public class BatchConfig {
     BeanWrapperFieldSetMapper<Student> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
     fieldSetMapper.setTargetType(Student.class);
 
+    lineMapper.setLineTokenizer(tokenizer);
+    lineMapper.setFieldSetMapper(fieldSetMapper);
+    return lineMapper;
+  }
+
+  private LineMapper<Customer> customerLineMapper() {
+
+    DefaultLineMapper<Customer> lineMapper = new DefaultLineMapper<>();
+    DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
+
+    tokenizer.setDelimiter("|");
+    tokenizer.setStrict(false);
+    tokenizer.setNames("id", "firstName", "lastName", "email", "phoneNumber", "country", "gender", "birthDate");
+
+    BeanWrapperFieldSetMapper<Customer> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
+    fieldSetMapper.setTargetType(Customer.class);
     lineMapper.setLineTokenizer(tokenizer);
     lineMapper.setFieldSetMapper(fieldSetMapper);
     return lineMapper;

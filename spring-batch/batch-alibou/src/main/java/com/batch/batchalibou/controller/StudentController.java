@@ -1,6 +1,5 @@
 package com.batch.batchalibou.controller;
 
-import com.batch.batchalibou.model.Student;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -11,8 +10,8 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,20 +28,39 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentController {
 
   private final JobLauncher jobLauncher;
-  private final Job job;
 
-  @PostMapping
-  public void importStudentToDb( ) {
+  @Qualifier("customerJob")
+  private final Job customerJob;
+
+  @Qualifier("importJob")
+  private final Job importJob;
+
+
+  @PostMapping("/students")
+  public void importStudentToDb() {
     JobParameters jobParameters = new JobParametersBuilder()
         .addLong("startAt", System.currentTimeMillis())
         .toJobParameters();
 
     try {
-      jobLauncher.run(job,jobParameters);
+      jobLauncher.run(importJob, jobParameters);
     } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException |
              JobParametersInvalidException e) {
-      log.error("Failed to load data: {}",e.getMessage());
+      log.error("Failed to load data: {}", e.getMessage());
     }
+  }
 
+  @PostMapping("/customers")
+  public void importCustomerToDb() {
+    JobParameters jobParameters = new JobParametersBuilder()
+        .addLong("startAt", System.currentTimeMillis())
+        .toJobParameters();
+
+    try {
+      jobLauncher.run(customerJob, jobParameters);
+    } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException |
+             JobParametersInvalidException e) {
+      log.error("Failed to load data: {}", e.getMessage());
+    }
   }
 }
