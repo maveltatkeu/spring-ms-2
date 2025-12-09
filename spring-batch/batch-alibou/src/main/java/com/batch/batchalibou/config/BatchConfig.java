@@ -167,7 +167,7 @@ public class BatchConfig {
 
     tokenizer.setDelimiter("|");
     tokenizer.setStrict(false);
-    tokenizer.setNames("id", "firstName", "lastName", "email", "phoneNumber", "country", "gender", "birthDate");
+    tokenizer.setNames("id", "FIRST_NAME", "lastName", "email", "phoneNumber", "country", "gender", "birthDate");
 
     BeanWrapperFieldSetMapper<Customer> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
     fieldSetMapper.setTargetType(Customer.class);

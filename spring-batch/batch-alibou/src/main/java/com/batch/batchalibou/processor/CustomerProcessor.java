@@ -13,11 +13,11 @@ public class CustomerProcessor implements ItemProcessor<Customer, Customer> {
   @Override
   public Customer process(Customer item) throws Exception {
     return Customer.builder()
-        .firstName(item.getFirstName())
-        .lastName(item.getLastName())
+        .firstName(item.getFirstName().toUpperCase())
+        .lastName(item.getLastName().toUpperCase())
         .email(item.getEmail())
         .phoneNumber(item.getPhoneNumber())
-        .country(item.getCountry())
+        .country(item.getCountry().toUpperCase())
         .gender(item.getGender())
         .birthDate(item.getBirthDate())
         .build();
