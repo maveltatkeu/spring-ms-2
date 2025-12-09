@@ -16,10 +16,13 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.batch.item.file.transform.FieldSet;
+import org.springframework.batch.item.validator.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +30,8 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import java.time.LocalDate;
 
 /**
  * Created by IntelliJ IDEA.
@@ -118,6 +123,10 @@ public class BatchConfig {
         .processor(customerProcessor())
         .writer(customerWriter())
         .taskExecutor(taskExecutor())
+        .faultTolerant()
+        .skipPolicy(fileValidationSkipPolicy())
+        .listener(skipListener())
+        .listener(readListener())
         .build();
   }
 
@@ -174,6 +183,42 @@ public class BatchConfig {
     lineMapper.setLineTokenizer(tokenizer);
     lineMapper.setFieldSetMapper(fieldSetMapper);
     return lineMapper;
+  }
+
+  private LineMapper<Customer> lineCustomerMapper() {
+    DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
+    tokenizer.setDelimiter("|");
+    tokenizer.setStrict(true);
+    tokenizer.setNames("id","firstName","lastName","email","phoneNumber","country","gender","birthDate");
+
+    BeanWrapperFieldSetMapper<Customer> fieldSetMapper = new BeanWrapperFieldSetMapper<>() {
+      {
+        setTargetType(Customer.class);
+      }
+    };
+
+    return (line, lineNumber) -> {
+      try {
+        FieldSet fs = tokenizer.tokenize(line);
+        Customer rec = fieldSetMapper.mapFieldSet(fs);
+        // parse id and date properly
+        try {
+          rec.setId(fs.readLong("id"));
+        } catch (Exception e) {
+          throw new ValidationException("Invalid id (not a long): " + fs.readString("id"));
+        }
+        try {
+          rec.setBirthDate(LocalDate.parse(fs.readString("birthDate")).toString());
+        } catch (Exception e) {
+          throw new ValidationException("Invalid birthDate: " + fs.readString("birthDate"));
+        }
+        return rec;
+      } catch (Exception ex) {
+        // wrap original exception, include line for logging
+        throw new FlatFileParseException("Error parsing line at " + lineNumber + ": " + ex.getMessage(),
+            line, lineNumber, ex);
+      }
+    };
   }
 
 }
