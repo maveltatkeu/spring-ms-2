@@ -145,7 +145,7 @@ public class BatchConfig {
         };
     }
 
-    @Bean
+    @Bean[Architecture.md](../../../_PROJECTS%20FOLDERS/Neko%20Services/Architecture.md)
     public ItemReadListener<UserRecord> readListener() {
         return new ItemReadListener<>() {
             @Override

@@ -124,9 +124,6 @@ public class BatchConfig {
         .writer(customerWriter())
         .taskExecutor(taskExecutor())
         .faultTolerant()
-        .skipPolicy(fileValidationSkipPolicy())
-        .listener(skipListener())
-        .listener(readListener())
         .build();
   }
 
@@ -215,8 +212,8 @@ public class BatchConfig {
         return rec;
       } catch (Exception ex) {
         // wrap original exception, include line for logging
-        throw new FlatFileParseException("Error parsing line at " + lineNumber + ": " + ex.getMessage(),
-            line, lineNumber, ex);
+        throw new FlatFileParseException("Error parsing data "+ex.getMessage(), ex,
+            line, lineNumber);
       }
     };
   }
